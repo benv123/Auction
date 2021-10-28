@@ -1,1 +1,9 @@
-Hello World
+* An auction post consists of an image (png, jpeg, or gif) and a written description without a word or character cap
+* The auction platform will display items being auctioned that match tags or keywords that the user entered upon initial sign-up
+* Each auctioneer will have a rating on a 5-star scale based on ratings from customers
+* The auction platform will display items from auctioneers with the best ratings at the top
+* Items being auctioned will be listed on said platform for 60 days, or 5 days after the first bid has been placed, but the auctioneer can extend the duration of the auction
+* Items will have an initial bidding price, and a price at which a user can purchase it directly
+* Once a customer has placed a bid, the auctioneer will be unable to retract the item
+* The start of an auction can be scheduled
+* There is a feature that allows prospective customers to DM the auctioneer
