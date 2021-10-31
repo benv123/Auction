@@ -1,0 +1,109 @@
+Tech Specs for Auction
+Priority List: (C = core)
+	item excluding image(C)
+	auction table and population(C)
+	users bid, list, chatting methods(hardest likely chatting)(C)
+	user ratings, retract, add duration 
+	item images
+
+AuctionTable class
+Item[] allitems
+ArrayList table
+Populate() takes in array of strings(keywords from user)
+	loop through all items;
+		loop through all keywords;
+			if item does contain keyword in description or title, populate table with item
+			sort table by rating(highest at index 0)
+				*display 
+			
+			
+
+
+
+Item Class
+Image
+Current Block
+Current Price
+BIN price
+Description
+Start time
+Duration left
+Visibility
+Retractable (false when bid is placed, changed through auction cell class)
+ArrayList<HashMap<User,price>> bids
+
+Item(image,start time, initial price, BINprice,description)
+	
+	if start time isn't null
+		take start time, convert to block#, subtract current block to yield time until start, set start time to this
+		visibility =false
+	else
+		start time = 0
+	set duration left to 432000(60day,12sec/block) + start time
+	set BIN price to BINprice
+	set current price to initial price
+	set description to description
+	set visibility to true
+
+bidReceived(price, time of bid, User user)
+	if price>current price and start time <= 0 and duration left > 0
+		if retractable true
+			retractable = false
+			if price not equal to BIN
+				set duration left to 36000(5days, 12sec/block)
+				add {User: user, price:price} to bids
+			else
+				subtract price's worth of currency from user's wallet
+				set duration left to 0
+				notify auctioneer user via DM of sell
+				ask user to rate auctioneer (1-5)
+				remove from allitems
+		else 
+			if price not equal to BIN
+				add {User: user, price:price} to bids
+	else
+		display "bid too low" message
+		
+aucCheck()(call every block)
+	duration left - 1
+	start time - 1
+	if duration left is 0 and bids isn't empty 
+		subtract price's worth of currency from most recent bid's user's wallet
+		notify auctioneer user via DM of sell
+		ask user to rate auctioneer 
+		emove from allitems
+		
+		
+	if start time = 0
+		visibility = true
+
+
+		
+User class
+Insert some kind of chat feature for transactions between users and auctioneers(which is basically just between users; allow for chatting in general)(requires like a 2d array or something, but could prolly just be imported from stack overflow)
+
+Wallet of user (address)
+Rating (number[])
+Ratingnum (number)
+string[] keywords
+Arraylist<Item> selling
+
+bid(item, price)
+	send price, time of bid(current block of user), user(self) to Item for bid received processing
+
+list(image file, description, item name, initial price, BINprice)
+	creates Item() using parameters
+	add new item to selling list and all items
+retract(item)
+	if item is inside of user's selling list and is retractable
+		set duration to 0
+		set visibility to false
+		remove from allitems
+addDuration(item, time)
+	if item is in user's selling list and if duration isn't 0
+		add (time converted to blocks) to duration left
+			
+
+rate(user, stars)
+	adds stars to rating array, averages ratings to get ratingnum()
+
