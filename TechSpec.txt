@@ -6,9 +6,14 @@ Priority List: (C = core)
 	user ratings, retract, add duration 
 	item images
 
+
 AuctionTable class
+
+variables
 Item[] allitems
 ArrayList table
+
+Methods
 Populate() takes in array of strings(keywords from user)
 	loop through all items;
 		loop through all keywords;
@@ -21,6 +26,7 @@ Populate() takes in array of strings(keywords from user)
 
 
 Item Class
+Variables
 Image
 Current Block
 Current Price
@@ -32,6 +38,7 @@ Visibility
 Retractable (false when bid is placed, changed through auction cell class)
 ArrayList<HashMap<User,price>> bids
 
+Method stuff
 Item(image,start time, initial price, BINprice,description)
 	
 	if start time isn't null
@@ -82,12 +89,14 @@ aucCheck()(call every block)
 User class
 Insert some kind of chat feature for transactions between users and auctioneers(which is basically just between users; allow for chatting in general)(requires like a 2d array or something, but could prolly just be imported from stack overflow)
 
+Variables
 Wallet of user (address)
 Rating (number[])
 Ratingnum (number)
 string[] keywords
 Arraylist<Item> selling
 
+Method stuff
 bid(item, price)
 	send price, time of bid(current block of user), user(self) to Item for bid received processing
 
